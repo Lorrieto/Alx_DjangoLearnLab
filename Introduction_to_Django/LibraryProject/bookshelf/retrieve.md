@@ -1,5 +1,7 @@
 \#RETRIEVE
 
+book= Book,object.get(title)
+
 print(book.title)
 
 1984
@@ -11,8 +13,4 @@ George Orwell
 print(book.year)
 
 1949
-
-
-
-
 
