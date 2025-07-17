@@ -1,6 +1,6 @@
 \#RETRIEVE
 
-book= Book.object.get(book.title)
+book= Book.object.get(title="1984)
 
 print(book.title)
 
