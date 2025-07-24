@@ -7,7 +7,7 @@ django.setup()
 
 from relationship_app.models import Author, Library
 
-# Query all books by a specific author
+
 def query_books_by_author(author_name):
     try:
         author = Author.objects.get(name=author_name)
@@ -34,6 +34,7 @@ def list_books_in_library(library_name):
 def get_librarian_for_library(library_name):
     try:
         library = Library.objects.get(name=library_name)
+        librarian = Librarian.objects.get(library=library_name)
         librarian = library.librarian
         print(f"Librarian for {library.name}: {librarian.name}")
     except Library.DoesNotExist:
