@@ -12,6 +12,7 @@ def query_books_by_author(author_name):
     try:
         author = Author.objects.get(name=author_name)
         books = author.books.all()
+        objects.filter(author=author)
         print(f"Books by {author.name}:")
         for book in books:
             print(f"- {book.title}")
@@ -47,3 +48,4 @@ if __name__ == "__main__":
     list_books_in_library("Central Library")
     print()
     get_librarian_for_library("Central Library")
+    
