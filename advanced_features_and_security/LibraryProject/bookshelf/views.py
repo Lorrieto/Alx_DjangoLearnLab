@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import permission_required
 from .models import Book
 from .forms import BookForm  # create this if not exists
 from django.db.models import Q
+from .forms import ExampleForm
 
 def search(request):
     query = request.GET.get('q', '')
