@@ -41,6 +41,25 @@ CSP_SCRIPT_SRC = ("'self'", 'ajax.googleapis.com')
 
 ALLOWED_HOSTS = []
 
+SECURE_SSL_REDIRECT = True  # Forces HTTPS connections
+
+# Use HTTP Strict Transport Security (HSTS) to enforce HTTPS
+SECURE_HSTS_SECONDS = 31536000  # 1 year
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True  # Apply to all subdomains
+SECURE_HSTS_PRELOAD = True  # Allow site to be included in browsers' HSTS preload list
+
+# Ensure cookies are only sent over HTTPS
+SESSION_COOKIE_SECURE = True  # Secure session cookies
+CSRF_COOKIE_SECURE = True  # Secure CSRF cookies
+
+# Secure headers
+X_FRAME_OPTIONS = 'DENY'  # Prevent clickjacking
+SECURE_CONTENT_TYPE_NOSNIFF = True  # Prevent MIME-sniffing
+SECURE_BROWSER_XSS_FILTER = True  # Enable XSS protection in browsers
+
+# It’s best to set this only when using HTTPS in production
+if not DEBUG:
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https') 
 
 # Application definition
 LOGIN_REDIRECT_URL = '/'
