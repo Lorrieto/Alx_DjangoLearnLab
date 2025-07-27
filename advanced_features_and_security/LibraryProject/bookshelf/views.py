@@ -2,6 +2,15 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import permission_required
 from .models import Book
 from .forms import BookForm  # create this if not exists
+from django.db.models import Q
+
+def search(request):
+    query = request.GET.get('q', '')
+    books = Book.objects.filter(Q(title__icontains=query))
+    return render(request, 'bookshelf/book_list.html', {'books': books})
+
+class BookSearchForm(forms.Form):
+    query = forms.CharField(max_length=100)
 
 @permission_required('bookshelf.can_view', raise_exception=True)
 def book_list(request):
