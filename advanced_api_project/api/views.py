@@ -1,42 +1,31 @@
 from rest_framework import generics, permissions, filters
+from django_filters.rest_framework import DjangoFilterBackend
 from .models import Book
 from .serializers import BookSerializer
 
-# LIST VIEW
 class BookListView(generics.ListAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     permission_classes = [permissions.AllowAny]
-    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
-    search_fields = ['title', 'author']
-    ordering_fields = ['published_date', 'title']
 
-# DETAIL VIEW
-class BookDetailView(generics.RetrieveAPIView):
-    queryset = Book.objects.all()
-    serializer_class = BookSerializer
-    permission_classes = [permissions.AllowAny]
+    # Add filtering, searching, ordering
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
 
-# CREATE VIEW
-class BookCreateView(generics.CreateAPIView):
-    queryset = Book.objects.all()
-    serializer_class = BookSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    # Fields for filtering
+    filterset_fields = ['title', 'author', 'published_date']  # Users can filter like ?title=Python
 
-    def perform_create(self, serializer):
-        serializer.save(created_by=self.request.user)
+    # Fields for searching (text search)
+    search_fields = ['title', 'author']  # Users can search like ?search=Python
 
-# UPDATE VIEW
-class BookUpdateView(generics.UpdateAPIView):
-    queryset = Book.objects.all()
-    serializer_class = BookSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    # Fields for ordering
+    ordering_fields = ['title', 'published_date']  # Users can order like ?ordering=title or ?ordering=-published_date
+    ordering = ['title']  # Default ordering
+class BookListView(generics.ListAPIView):
+    """
+    GET /api/books/
 
-    def perform_update(self, serializer):
-        serializer.save(updated_by=self.request.user)
-
-# DELETE VIEW
-class BookDeleteView(generics.DestroyAPIView):
-    queryset = Book.objects.all()
-    serializer_class = BookSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    Features:
+    - Filtering: ?title=<title>&author=<author>&published_date=<YYYY-MM-DD>
+    - Search: ?search=<text>  (searches title and author)
+    - Ordering: ?ordering=<field>  (use '-' prefix for descending)
+    """
