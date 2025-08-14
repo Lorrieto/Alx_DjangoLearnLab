@@ -1,6 +1,7 @@
+# blog/urls.py
 from django.urls import path
 from .views import (
-    PostListView,
+    PostListView, 
     PostDetailView,
     PostCreateView,
     PostUpdateView,
@@ -8,10 +9,10 @@ from .views import (
 )
 
 urlpatterns = [
-    path('posts/', PostListView.as_view(), name='post-list'),
-    path('posts/new/', PostCreateView.as_view(), name='post-new'),  # create
-    path('posts/<int:pk>/', PostDetailView.as_view(), name='post-detail'),  # read
-    path('posts/<int:pk>/update/', PostUpdateView.as_view(), name='post-update'),  # update
-    path('posts/<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),  # delete
-    path('post/<int:pk>/delete/', "post/<int:pk>/update/", "post/new/"),
+    path('', PostListView.as_view(), name='post-list'),
+    path('post/<int:pk>/', PostDetailView.as_view(), name='post-detail'),
+    path('post/new/', PostCreateView.as_view(), name='post-create'),
+    path('post/<int:pk>/edit/', PostUpdateView.as_view(), name='post-update'),
+    path('post/<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),
 ]
+
