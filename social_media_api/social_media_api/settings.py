@@ -153,3 +153,5 @@ CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_ROOT = BASE_DIR / 'mediafiles'
+
+PORT = os.getenv("PORT", "8000") 
