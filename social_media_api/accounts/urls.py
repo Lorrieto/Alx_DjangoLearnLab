@@ -1,10 +1,11 @@
-from rest_framework.routers import DefaultRouter
-from .views import PostViewSet, CommentViewSet
+from django.urls import path
+from .views import RegisterView, LoginView, ProfileView
+# from .views import LogoutView # optional
 
 
-router = DefaultRouter()
-router.register(r'posts', PostViewSet, basename='post')
-router.register(r'comments', CommentViewSet, basename='comment')
-
-
-urlpatterns = router.urls
+urlpatterns = [
+    path('register/', RegisterView.as_view(), name='register'),
+    path('login/', LoginView.as_view(), name='login'),
+    path('profile/', ProfileView.as_view(), name='profile'),
+    # path('logout/', LogoutView.as_view(), name='logout'),
+]
