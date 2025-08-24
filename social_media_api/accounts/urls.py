@@ -8,4 +8,5 @@ urlpatterns = [
     path('login/', LoginView.as_view(), name='login'),
     path('profile/', ProfileView.as_view(), name='profile'),
     # path('logout/', LogoutView.as_view(), name='logout'),
+    #"unfollow/<int:user_id>/", "follow/<int:user_id>"]
 ]
