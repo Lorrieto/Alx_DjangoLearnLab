@@ -16,5 +16,6 @@ urlpatterns = [
     path('post/<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),
     #"post/<int:pk>/update/"
     #"comment/<int:pk>/update/", "post/<int:pk>/comments/new/", "comment/<int:pk>/delete/"
+    #tags/<slug:tag_slug>/", "PostByTagListView.as_view()
 ]
 
