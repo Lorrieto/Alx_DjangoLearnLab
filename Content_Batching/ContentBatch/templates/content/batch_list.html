@@ -1,0 +1,12 @@
+<h1>Batches</h1>
+<a href="{% url 'batch_create' %}">+ New Batch</a>
+<ul>
+  {% for batch in batches %}
+    <li>
+      <a href="{% url 'batch_detail' batch.id %}">{{ batch.name }}</a>
+      ({{ batch.created_at }})
+    </li>
+  {% empty %}
+    <li>No batches yet</li>
+  {% endfor %}
+</ul>
